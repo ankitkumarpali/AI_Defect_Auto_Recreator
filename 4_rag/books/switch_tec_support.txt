@@ -1,0 +1,464 @@
+------------------ show running-config ------------------
+
+
+Building configuration...
+
+Current configuration : 44727 bytes
+!
+! Last configuration change at 20:18:03 PDT Fri Jul 28 2023
+!
+version 17.3
+service timestamps debug datetime msec localtime show-timezone
+service timestamps log datetime msec localtime show-timezone
+service password-encryption
+service unsupported-transceiver
+no platform punt-keepalive disable-kernel-core
+!
+hostname ftw8-fc-dis-r-11-1
+!
+!
+
+key chain TEST_3 macsec
+ key BBBB
+  cryptographic-algorithm aes-256-cmac
+  key-string 7 <removed>
+  lifetime 15:00:00 Jul 28 2021 infinite
+ key AAAA
+  cryptographic-algorithm aes-256-cmac
+  key-string 7 <removed>
+  lifetime local 15:00:00 Mar 28 2022 duration 1800
+
+
+interface Port-channel1
+ description --> ftw8-fc-acc-sw-11-1 Po1
+ switchport mode trunk
+ switchport nonegotiate
+ logging event trunk-status
+ load-interval 30
+ storm-control broadcast level 5.00 2.00
+ storm-control action trap
+ ipv6 ospf 100 area 0
+ ipv6 ospf network point-to-point
+ bfd interval 750 min_rx 750 multiplier 3
+!
+interface Port-channel9
+ description --> ftw8-fc-acc-sw-11-9 Po9
+ switchport mode trunk
+ switchport nonegotiate
+ logging event trunk-status
+ load-interval 30
+ storm-control broadcast level 5.00 2.00
+ storm-control action trap
+!
+interface Port-channel101
+ description ftw8-fc-agg-t1-a-1 Po11
+ no switchport
+ ip address 100.101.0.21 255.255.255.254
+ ip pim sparse-mode
+ load-interval 30
+ storm-control multicast level 5.00 2.00
+ storm-control action trap
+!
+interface Port-channel102
+ no switchport
+ ip address 100.101.0.101 255.255.255.254
+ ip pim sparse-mode
+ load-interval 30
+ storm-control multicast level 5.00 2.00
+ storm-control action trap
+!
+interface Port-channel103
+ no switchport
+ ip address 100.101.0.181 255.255.255.254
+ ip pim sparse-mode
+ load-interval 30
+ storm-control multicast level 5.00 2.00
+ storm-control action trap
+!
+interface Port-channel104
+ description ftw8-fc-agg-t1-a-4 Po11
+ no switchport
+ ip address 100.101.1.5 255.255.255.254
+ ip pim sparse-mode
+ load-interval 30
+ storm-control multicast level 5.00 2.00
+ storm-control action trap
+!
+interface TenGigabitEthernet1/0/33
+ no switchport
+ no ip address
+ load-interval 30
+ macsec network-link
+ mka pre-shared-key key-chain TEST_3
+ storm-control multicast level 5.00 2.00
+ storm-control action trap
+ channel-group 101 mode active
+ lacp rate fast
+!
+interface TenGigabitEthernet1/0/34
+ no switchport
+ no ip address
+ load-interval 30
+ macsec network-link
+ mka pre-shared-key key-chain TEST_3
+ storm-control multicast level 5.00 2.00
+ storm-control action trap
+ channel-group 102 mode active
+ lacp rate fast
+!
+interface TenGigabitEthernet1/0/1
+ switchport mode trunk
+ switchport nonegotiate
+ logging event trunk-status
+ load-interval 30
+ storm-control broadcast level 5.00 2.00
+ storm-control action trap
+ channel-group 1 mode active
+!
+interface TenGigabitEthernet1/0/9
+ switchport mode trunk
+ switchport nonegotiate
+ logging event trunk-status
+ load-interval 30
+ storm-control broadcast level 5.00 2.00
+ storm-control action trap
+ channel-group 9 mode active
+!
+interface TenGigabitEthernet2/0/33
+ no switchport
+ no ip address
+ load-interval 30
+ ip pim sparse-mode
+ ip ospf 100 area 0
+ ipv6 address 2013:22:1:1::2/120
+ ipv6 enable
+ ipv6 ospf 100 area 0
+ ipv6 ospf network point-to-point
+ bfd interval 750 min_rx 750 multiplier 3
+ storm-control multicast level 5.00 2.00
+ storm-control action trap
+ channel-group 103 mode active
+ lacp rate fast
+!
+interface TenGigabitEthernet2/0/34
+ no switchport
+ no ip address
+ load-interval 30
+ storm-control multicast level 5.00 2.00
+ storm-control action trap
+ channel-group 104 mode active
+ lacp rate fast
+!
+
+------------------ show etherchannel summary ------------------
+
+
+Flags:  D - down        P - bundled in port-channel
+        I - stand-alone s - suspended
+        H - Hot-standby (LACP only)
+        R - Layer3      S - Layer2
+        U - in use      f - failed to allocate aggregator
+
+        M - not in use, minimum links not met
+        u - unsuitable for bundling
+        w - waiting to be aggregated
+        d - default port
+
+        A - formed by Auto LAG
+
+
+Number of channel-groups in use: 6
+Number of aggregators:           6
+
+Group  Port-channel  Protocol    Ports
+------+-------------+-----------+-----------------------------------------------
+1      Po1(SU)         LACP        Te1/0/1(P)      Te2/0/1(P)
+9      Po9(SU)         LACP        Te1/0/9(P)      Te2/0/9(P)
+101    Po101(RU)       LACP        Te1/0/33(P)
+102    Po102(RU)       LACP        Te1/0/34(P)
+103    Po103(RU)       LACP        Te2/0/33(P)
+104    Po104(RU)       LACP        Te2/0/34(P)
+
+------------------ show interfaces trunk ------------------
+
+
+
+Port           Mode             Encapsulation  Status        Native vlan
+Po1            on               802.1q         trunking      1
+Po9            on               802.1q         trunking      1
+
+Port           Vlans allowed on trunk
+Po1            1-4093
+Po9            1-4093
+
+Port           Vlans allowed and active in management domain
+Po1            1,101-102,207,310,503,510,656-657,700-702,708-709,711,715,750-751,855,912,915,943,985,2101
+Po9            1,101-102,207,310,503,510,656-657,700-702,708-709,711,715,750-751,855,912,915,943,985,2101
+
+Port           Vlans in spanning tree forwarding state and not pruned
+Po1            1,101-102,207,310,503,510,656-657,700-702,708-709,711,715,750-751,855,912,915,943,985,2101
+Po9            1,101-102,207,310,503,510,656-657,700-702,708-709,711,715,750-751,855,912,915,943,985,2101
+
+
+------------------ show cdp neighbor ------------------
+
+
+Capability Codes: R - Router, T - Trans Bridge, B - Source Route Bridge
+                  S - Switch, H - Host, I - IGMP, r - Repeater, P - Phone,
+                  D - Remote, C - CVTA, M - Two-port Mac Relay
+
+Device ID        Local Intrfce     Holdtme    Capability  Platform  Port ID
+ftw8-fc-acc-sw-11-1.amazon.com
+                 Ten 1/0/1         135              S I   C9300-48U Ten 1/1/1
+ftw8-fc-acc-sw-11-1.amazon.com
+                 Ten 2/0/1         151              S I   C9300-48U Ten 1/1/2
+ftw8-fc-acc-sw-11-9.amazon.com
+                 Ten 1/0/9         151              S I   C9300-48U Ten 1/1/1
+ftw8-fc-acc-sw-11-9.amazon.com
+                 Ten 2/0/9         127              S I   C9300-48U Ten 1/1/2
+ftw8-fc-agg-t1-a-4.amazon.com
+                 Ten 2/0/34        131             R S I  C9500-40X Ten 1/0/11
+ftw8-fc-agg-t1-a-3.amazon.com
+                 Ten 2/0/33        149             R S I  C9500-40X Ten 1/0/11
+ftw8-fc-agg-t1-a-2.amazon.com
+                 Ten 1/0/34        147             R S I  C9500-40X Ten 1/0/11
+ftw8-fc-agg-t1-a-1.amazon.com
+                 Ten 1/0/33        175             R S I  C9500-40X Ten 1/0/11
+
+Total cdp entries displayed : 8
+
+------------------ show cdp neighbor detail ------------------
+
+
+-------------------------
+Device ID: ftw8-fc-acc-sw-11-1.amazon.com
+Entry address(es):
+  IP address: 10.19.64.96
+Platform: cisco C9300-48U,  Capabilities: Switch IGMP
+Interface: TenGigabitEthernet1/0/1,  Port ID (outgoing port): TenGigabitEthernet1/1/1
+Holdtime : 135 sec
+
+Version :
+Cisco IOS Software [Fuji], Catalyst L3 Switch Software (CAT9K_IOSXE), Version 16.9.3, CUST-SPECIAL:V169_3_ES2
+This software is supported for a limited time under special agreement with Cisco Systems, Inc. ES2
+Copyright (c) 1986-2019 by Cisco Systems, Inc.
+Compiled Tue 09-Apr-19 12:33 by mcpre
+
+advertisement version: 2
+VTP Management Domain: 'FTW8'
+Native VLAN: 1
+Duplex: full
+Management address(es):
+  IP address: 10.19.64.96
+
+-------------------------
+Device ID: ftw8-fc-acc-sw-11-1.amazon.com
+Entry address(es):
+  IP address: 10.19.64.96
+Platform: cisco C9300-48U,  Capabilities: Switch IGMP
+Interface: TenGigabitEthernet2/0/1,  Port ID (outgoing port): TenGigabitEthernet1/1/2
+Holdtime : 151 sec
+
+Version :
+Cisco IOS Software [Fuji], Catalyst L3 Switch Software (CAT9K_IOSXE), Version 16.9.3, CUST-SPECIAL:V169_3_ES2
+This software is supported for a limited time under special agreement with Cisco Systems, Inc. ES2
+Copyright (c) 1986-2019 by Cisco Systems, Inc.
+Compiled Tue 09-Apr-19 12:33 by mcpre
+
+advertisement version: 2
+VTP Management Domain: 'FTW8'
+Native VLAN: 1
+Duplex: full
+Management address(es):
+  IP address: 10.19.64.96
+
+-------------------------
+Device ID: ftw8-fc-acc-sw-11-9.amazon.com
+Entry address(es):
+  IP address: 10.19.64.97
+Platform: cisco C9300-48U,  Capabilities: Switch IGMP
+Interface: TenGigabitEthernet1/0/9,  Port ID (outgoing port): TenGigabitEthernet1/1/1
+Holdtime : 151 sec
+
+Version :
+Cisco IOS Software [Fuji], Catalyst L3 Switch Software (CAT9K_IOSXE), Version 16.9.3, CUST-SPECIAL:V169_3_ES2
+This software is supported for a limited time under special agreement with Cisco Systems, Inc. ES2
+Copyright (c) 1986-2019 by Cisco Systems, Inc.
+Compiled Tue 09-Apr-19 12:33 by mcpre
+
+advertisement version: 2
+VTP Management Domain: 'FTW8'
+Native VLAN: 1
+Duplex: full
+Management address(es):
+  IP address: 10.19.64.97
+
+-------------------------
+Device ID: ftw8-fc-acc-sw-11-9.amazon.com
+Entry address(es):
+  IP address: 10.19.64.97
+Platform: cisco C9300-48U,  Capabilities: Switch IGMP
+Interface: TenGigabitEthernet2/0/9,  Port ID (outgoing port): TenGigabitEthernet1/1/2
+Holdtime : 127 sec
+
+Version :
+Cisco IOS Software [Fuji], Catalyst L3 Switch Software (CAT9K_IOSXE), Version 16.9.3, CUST-SPECIAL:V169_3_ES2
+This software is supported for a limited time under special agreement with Cisco Systems, Inc. ES2
+Copyright (c) 1986-2019 by Cisco Systems, Inc.
+Compiled Tue 09-Apr-19 12:33 by mcpre
+
+advertisement version: 2
+VTP Management Domain: 'FTW8'
+Native VLAN: 1
+Duplex: full
+Management address(es):
+  IP address: 10.19.64.97
+
+-------------------------
+Device ID: ftw8-fc-agg-t1-a-4.amazon.com
+Entry address(es):
+  IP address: 100.101.1.4
+Platform: cisco C9500-40X,  Capabilities: Router Switch IGMP
+Interface: TenGigabitEthernet2/0/34,  Port ID (outgoing port): TenGigabitEthernet1/0/11
+Holdtime : 131 sec
+
+Version :
+Cisco IOS Software [Amsterdam], Catalyst L3 Switch Software (CAT9K_IOSXE), Version 17.3.3, RELEASE SOFTWARE (fc7)
+Technical Support: http://www.cisco.com/techsupport
+Copyright (c) 1986-2021 by Cisco Systems, Inc.
+Compiled Thu 04-Mar-21 12:32 by mcpre
+
+advertisement version: 2
+VTP Management Domain: ''
+Duplex: full
+Management address(es):
+  IP address: 100.101.1.4
+
+-------------------------
+Device ID: ftw8-fc-agg-t1-a-3.amazon.com
+Entry address(es):
+  IP address: 100.101.0.180
+Platform: cisco C9500-40X,  Capabilities: Router Switch IGMP
+Interface: TenGigabitEthernet2/0/33,  Port ID (outgoing port): TenGigabitEthernet1/0/11
+Holdtime : 149 sec
+
+Version :
+Cisco IOS Software [Amsterdam], Catalyst L3 Switch Software (CAT9K_IOSXE), Version 17.3.3, RELEASE SOFTWARE (fc7)
+Technical Support: http://www.cisco.com/techsupport
+Copyright (c) 1986-2021 by Cisco Systems, Inc.
+Compiled Thu 04-Mar-21 12:32 by mcpre
+
+advertisement version: 2
+VTP Management Domain: ''
+Duplex: full
+Management address(es):
+  IP address: 100.101.0.180
+
+-------------------------
+Device ID: ftw8-fc-agg-t1-a-2.amazon.com
+Entry address(es):
+  IP address: 100.101.0.100
+Platform: cisco C9500-40X,  Capabilities: Router Switch IGMP
+Interface: TenGigabitEthernet1/0/34,  Port ID (outgoing port): TenGigabitEthernet1/0/11
+Holdtime : 147 sec
+
+Version :
+Cisco IOS Software [Amsterdam], Catalyst L3 Switch Software (CAT9K_IOSXE), Version 17.3.3, RELEASE SOFTWARE (fc7)
+Technical Support: http://www.cisco.com/techsupport
+Copyright (c) 1986-2021 by Cisco Systems, Inc.
+Compiled Thu 04-Mar-21 12:32 by mcpre
+
+advertisement version: 2
+VTP Management Domain: ''
+Duplex: full
+Management address(es):
+  IP address: 100.101.0.100
+
+-------------------------
+Device ID: ftw8-fc-agg-t1-a-1.amazon.com
+Entry address(es):
+  IP address: 100.101.0.20
+Platform: cisco C9500-40X,  Capabilities: Router Switch IGMP
+Interface: TenGigabitEthernet1/0/33,  Port ID (outgoing port): TenGigabitEthernet1/0/11
+Holdtime : 175 sec
+
+Version :
+Cisco IOS Software [Amsterdam], Catalyst L3 Switch Software (CAT9K_IOSXE), Version 17.3.3, RELEASE SOFTWARE (fc7)
+Technical Support: http://www.cisco.com/techsupport
+Copyright (c) 1986-2021 by Cisco Systems, Inc.
+Compiled Thu 04-Mar-21 12:32 by mcpre
+
+advertisement version: 2
+VTP Management Domain: ''
+Duplex: full
+Management address(es):
+  IP address: 100.101.0.20
+
+
+Total cdp entries displayed : 8
+
+------------------ show subscriber statistics ------------------
+
+
+
+Current Subscriber Statistics:
+Number of sessions currently up: 0
+Number of sessions currently pending: 0
+Number of sessions currently authenticated: 0
+Number of sessions currently unauthenticated: 0
+Highest number of sessions ever up at one time: 0
+Mean up-time duration of sessions: 00:00:00
+Total number of sessions up so far: 0
+Mean call rate per minute: 0, per hour: 0
+Number of calls in last one hour: 0
+Number of sessions failed to come up: 0
+
+Current Flow Statistics:
+Number of flows currently up: 0
+Highest number of flows ever up at one time: 0
+Mean up-time duration of flows: 00:00:00
+Number of flows failed to come up: 0
+Total number of flows up so far: 0
+
+IP/DHCP session type count:
+
+Switch Id Cleanup Statistics:
+Number of sessions having invalid SMGR handle: 0
+Number of sessions having invalid policy handle: 0
+Number of sessions having invalid LTERM handle: 0
+Number of sessions having invalid SIP handle: 0
+
+Lterm Error Statistics:
+
+Lterm session delete errors:
+
+
+------------------ show ip subscriber statistics errors ------------------
+
+
+
+------------------ show ip subscriber statistics dangling ------------------
+
+
+
+------------------ show pppoe statistics ------------------
+
+
+
+------------------ show pppoe summary ------------------
+
+
+
+------------------ show ppp statistics ------------------
+
+
+
+Type PPP Statistic                              TOTAL      SINCE CLEARED
+---- -----------------------------------------  ---------- -------------
+
+Type PPP MIB Counters                           PEAK       CURRENT
+---- -----------------------------------------  ---------- -------------
+
+Type PPP Disconnect Reason                      TOTAL      SINCE CLEARED
+---- -----------------------------------------  ---------- -------------
+

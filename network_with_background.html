@@ -1,0 +1,146 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Network Visualization</title>
+    <style>
+        body {
+            background-image: url('your_image_url_here');
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script src="lib/bindings/utils.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100%;
+                 height: 600px;
+                 background-color: white;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"color": "lightblue", "font": {"color": "black"}, "id": "ftw8-fc-dis-r-11-1", "label": "ftw8-fc-dis-r-11-1", "shape": "box", "size": 30, "title": "ftw8-fc-dis-r-11-1"}, {"color": "lightblue", "font": {"color": "black"}, "id": "ftw8-fc-acc-sw-11-1.amazon.com", "label": "ftw8-fc-acc-sw-11-1.amazon.com", "shape": "box", "size": 25, "title": "ftw8-fc-acc-sw-11-1.amazon.com \nIP: 10.19.64.95\nVersion: 16.9.3\nVLAN: 1 (native) \nInterface: TenGigabitEthernet1/1/1 \nL2\n\nswitchport mode trunk"}, {"color": "lightblue", "font": {"color": "black"}, "id": "ftw8-fc-acc-sw-11-9.amazon.com", "label": "ftw8-fc-acc-sw-11-9.amazon.com", "shape": "box", "size": 25, "title": "ftw8-fc-acc-sw-11-9.amazon.com \nIP: 10.19.64.98\nVersion: 16.9.3\nVLAN: 1 (native) \nInterface: TenGigabitEthernet1/1/1 \nL2\n\nswitchport mode trunk"}, {"color": "lightblue", "font": {"color": "black"}, "id": "ftw8-fc-agg-t1-a-4.amazon.com", "label": "ftw8-fc-agg-t1-a-4.amazon.com", "shape": "box", "size": 25, "title": "ftw8-fc-agg-t1-a-4.amazon.com \nIP: 100.101.1.5\nVersion: 17.3.3\nVLAN:  () \nInterface: TenGigabitEthernet1/0/11 \nL3\n\nip pim sparse mode"}, {"color": "lightblue", "font": {"color": "black"}, "id": "ftw8-fc-agg-t1-a-3.amazon.com", "label": "ftw8-fc-agg-t1-a-3.amazon.com", "shape": "box", "size": 25, "title": "ftw8-fc-agg-t1-a-3.amazon.com \nIP: 100.101.0.181\nVersion: 17.3.3\nVLAN:  () \nInterface: TenGigabitEthernet1/0/11 \nL3\nudld port aggressive\nipv6 enable\nipv6 ospf 100 area 0 \nipv6 ospf network point-to-point\nip dhcp snooping trust\n750 min_rx 750 multiplier 3\nip pim sparse mode"}, {"color": "lightblue", "font": {"color": "black"}, "id": "ftw8-fc-agg-t1-a-2.amazon.com", "label": "ftw8-fc-agg-t1-a-2.amazon.com", "shape": "box", "size": 25, "title": "ftw8-fc-agg-t1-a-2.amazon.com \nIP: 100.101.0.101\nVersion: 17.3.3\nVLAN:  () \nInterface: TenGigabitEthernet1/0/11 \nL3\n"}, {"color": "lightblue", "font": {"color": "black"}, "id": "ftw8-fc-agg-t1-a-1.amazon.com", "label": "ftw8-fc-agg-t1-a-1.amazon.com", "shape": "box", "size": 25, "title": "ftw8-fc-agg-t1-a-1.amazon.com \nIP: 100.101.0.21\nVersion: 17.3.3\nVLAN:  () \nInterface: TenGigabitEthernet1/0/11 \nL3\n"}]);
+                  edges = new vis.DataSet([{"arrows": "to", "color": "red", "font": {"color": "black", "size": 6}, "from": "ftw8-fc-dis-r-11-1", "label": "TenGigabitEthernet1/0/1", "smooth": {"roundness": 0.1, "type": "curvedCCW"}, "title": "Port: TenGigabitEthernet1/0/1, IP: 10.19.64.96, VLAN: 1 (native)", "to": "ftw8-fc-acc-sw-11-1.amazon.com"}, {"arrows": "to", "color": "red", "font": {"color": "black", "size": 6}, "from": "ftw8-fc-dis-r-11-1", "label": "TenGigabitEthernet2/0/1", "smooth": {"roundness": 0.15000000000000002, "type": "curvedCCW"}, "title": "Port: TenGigabitEthernet2/0/1, IP: 10.19.64.96, VLAN: 1 (native)", "to": "ftw8-fc-acc-sw-11-1.amazon.com"}, {"arrows": "to", "color": "gray", "font": {"color": "black", "size": 6}, "from": "ftw8-fc-dis-r-11-1", "label": "TenGigabitEthernet1/0/9", "smooth": {"roundness": 0.2, "type": "curvedCCW"}, "title": "Port: TenGigabitEthernet1/0/9, IP: 10.19.64.97, VLAN: 1 (native)", "to": "ftw8-fc-acc-sw-11-9.amazon.com"}, {"arrows": "to", "color": "gray", "font": {"color": "black", "size": 6}, "from": "ftw8-fc-dis-r-11-1", "label": "TenGigabitEthernet2/0/9", "smooth": {"roundness": 0.25, "type": "curvedCCW"}, "title": "Port: TenGigabitEthernet2/0/9, IP: 10.19.64.97, VLAN: 1 (native)", "to": "ftw8-fc-acc-sw-11-9.amazon.com"}, {"arrows": "to", "color": "gray", "font": {"color": "black", "size": 6}, "from": "ftw8-fc-dis-r-11-1", "label": "TenGigabitEthernet2/0/34", "smooth": {"roundness": 0.30000000000000004, "type": "curvedCCW"}, "title": "Port: TenGigabitEthernet2/0/34, IP: 100.101.1.4, VLAN:  ()", "to": "ftw8-fc-agg-t1-a-4.amazon.com"}, {"arrows": "to", "color": "orange", "font": {"color": "black", "size": 6}, "from": "ftw8-fc-dis-r-11-1", "label": "TenGigabitEthernet2/0/33", "smooth": {"roundness": 0.35, "type": "curvedCCW"}, "title": "Port: TenGigabitEthernet2/0/33, IP: 100.101.0.180, VLAN:  ()", "to": "ftw8-fc-agg-t1-a-3.amazon.com"}, {"arrows": "to", "color": "gray", "font": {"color": "black", "size": 6}, "from": "ftw8-fc-dis-r-11-1", "label": "TenGigabitEthernet1/0/34", "smooth": {"roundness": 0.4, "type": "curvedCCW"}, "title": "Port: TenGigabitEthernet1/0/34, IP: 100.101.0.100, VLAN:  ()", "to": "ftw8-fc-agg-t1-a-2.amazon.com"}, {"arrows": "to", "color": "gray", "font": {"color": "black", "size": 6}, "from": "ftw8-fc-dis-r-11-1", "label": "TenGigabitEthernet1/0/33", "smooth": {"roundness": 0.45000000000000007, "type": "curvedCCW"}, "title": "Port: TenGigabitEthernet1/0/33, IP: 100.101.0.20, VLAN:  ()", "to": "ftw8-fc-agg-t1-a-1.amazon.com"}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {"nodes": {"scaling": {"min": 10, "max": 30}, "font": {"size": 10, "face": "Helvetica"}}, "edges": {"smooth": {"enabled": true, "type": "dynamic", "roundness": 1}}, "interaction": {"hover": true, "zoomView": true}, "physics": {"stabilization": false, "barnesHut": {"gravitationalConstant": -8000, "centralGravity": 0.3, "springLength": 95, "springConstant": 0.04}}};
+
+                  
+
+
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+
+                  
+
+
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>
+</body>
+</html>

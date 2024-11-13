@@ -1,0 +1,306 @@
+{
+	"sut": {
+		"cluster": {
+			"host": "10.197.153.208",
+			"username": "admin",
+			"password": "Maglev123",
+			"port": 14141,
+			"10net-address": "11.11.11.3",
+			"service_user": "postgres-apic_em_user"
+		    },
+		"maglev": {
+			"host": "10.197.153.208",
+			"username": "maglev",
+			"password": "Maglev123",
+			"port": 2222
+		    },
+		"grapevine": {
+			"host": "10.197.153.208",
+			"username": "maglev",
+			"password": "Maglev123"
+		    },
+		"sapro-server": {
+			"host": "1.2.3.4",
+			"username": "root",
+			"password": "Grandkey",
+			"sapro-path": "/opt/sapro/bin",
+			"sapro-logs-path": "/opt/sapro/log"
+		},
+		"catalog_server": {
+        	"server":"https://10.195.144.155:443",
+        	"repo":"dnac12",
+        	"token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1YWI2YzU5ODdkNjQzZjAwOGM0NDdhZWYiLCJhdXRoU291cmNlIjoiaW50ZXJuYWwiLCJ0ZW5hbnROYW1lIjoiVE5UMCIsInJvbGVzIjpbIjVhYjZjNTViY2I5NjI4ODZjOWEzNDEzNSJdLCJ0ZW5hbnRJZCI6IjVhYjZjNTk3N2Q2NDNmMDA4YzQ0N2FlZSIsImV4cCI6MTcyMzUwODQyNSwidXNlcm5hbWUiOiJhZG1pbiJ9.ykE0F02MQriBuuIZv5zUfcoEtAlMqZ4VcHeBMpsGHQU",
+        	"ignore":true
+        }
+
+	},
+	"driver": {
+		"connect": "standalone",
+		"grid": {
+			"hub": "1.2.3.4",
+			"port": "4444",
+			"nodeName": "pnp"
+		},
+		"remote": {
+			"host": "2.3.4.5",
+			"port": "4444"
+		},
+		"browser": {
+			"name": "chrome",
+			"version": "51.0",
+			"platform": "MAC",
+			"proxy": {
+				"enable": false,
+				"url": "",
+				"port": ""
+			}
+		}
+	},
+	"development": {
+		"update_knowngood": false,
+		"debug": false
+	},
+	"logging": {
+		"level": "DEBUG",
+		"path": ""
+	},
+	"device_list": ["Border-01,Border-02,STK"],
+	"underlay_device_list": ["Border-01","Border-02","STK"],
+	"border_list": ["Border-01,Border-02"],
+	"pnp_device_list": [],
+	"host_list": [],
+	"extended_node_dhcp_server": [],
+	"interface_connected_to_dhcp_on_border":[],
+	"distribution_node":[],
+	"fusion_router": "fusion",
+	"incompatible_fabric_device": "",
+	"lan_auto_isis_password": "maglev123",
+    "snmp_rw_community": "maglev123",
+    "snmp_ro_community": "maglev123",
+    "snmp_version": "v2",
+    "snmp_timeout": 30,
+    "enable_password_list": ["maglev123"],
+    "password_list": ["maglev123"],
+    "username_list": ["maglev"],
+    "discovery_name": "discovered-via-script",
+    "discovery_type": "multi range",
+    "ip_address_list": "1.2.3.4-1.2.3.10",
+    "ipAddressListArray":["1.2.3.4-1.2.3.10"],
+    "protocol_order": "ssh,telnet",
+	"aaa_server_list": [{
+        "aaa_server_name": "bjatti-ise",
+		"aaa_server_ip_list": ["10.78.96.109"],
+		"aaa_server_shared_secret": "Maglev123",
+        "aaa_server_role": "PRIMARY",
+	    "aaa_server_port": 0,
+		"aaa_server_accounting_port": 1813,
+		"aaa_server_authentication_port": 1812,
+		"aaa_server_protocol": "RADIUS",
+		"aaa_server_retries": 1,
+		"aaa_server_timeout": 5,
+        "is_ise_enabled" : true,
+        "ise_server_username": "admin",
+		"ise_server_password": "Maglev123",
+		"ise_server_fqdn": "psise-1.cisco.com",
+        "ise_private_ip_address": ["11.11.11.6"]
+	},
+    {
+        "aaa_server_name": "dnac-ise2",
+		"aaa_server_ip_list": ["10.6.246.253"],
+		"aaa_server_shared_secret": "cisco123",
+        "aaa_server_role": "PRIMARY",
+	    "aaa_server_port": 0,
+		"aaa_server_accounting_port": 1813,
+		"aaa_server_authentication_port": 1812,
+		"aaa_server_protocol": "RADIUS",
+		"aaa_server_retries": 1,
+		"aaa_server_timeout": 2,
+        "is_ise_enabled" : false,
+        "ise_server_username": "admin",
+		"ise_server_password": "Ise123!",
+		"ise_server_fqdn": "dnac-ise2.cisco.com",
+        "ise_private_ip_address": []
+	},
+    {
+        "aaa_server_name": "dnac-ise3",
+		"aaa_server_ip_list": ["10.6.247.253"],
+		"aaa_server_shared_secret": "cisco123",
+        "aaa_server_role": "PRIMARY",
+	    "aaa_server_port": 0,
+		"aaa_server_accounting_port": 1813,
+		"aaa_server_authentication_port": 1812,
+		"aaa_server_protocol": "RADIUS",
+		"aaa_server_retries": 1,
+		"aaa_server_timeout": 2,
+        "is_ise_enabled" : false,
+        "ise_server_username": "admin",
+		"ise_server_password": "Ise123!",
+		"ise_server_fqdn": "dnac-ise3.cisco.com",
+        "ise_private_ip_address": []
+	},
+    {
+        "aaa_server_name": "dnac-ise4",
+		"aaa_server_ip_list": ["10.6.248.253"],
+		"aaa_server_shared_secret": "cisco123",
+        "aaa_server_role": "PRIMARY",
+	    "aaa_server_port": 0,
+		"aaa_server_accounting_port": 1813,
+		"aaa_server_authentication_port": 1812,
+		"aaa_server_protocol": "RADIUS",
+		"aaa_server_retries": 1,
+		"aaa_server_timeout": 2,
+        "is_ise_enabled" : false,
+        "ise_server_username": "admin",
+		"ise_server_password": "Ise123!",
+		"ise_server_fqdn": "dnac-ise4.cisco.com",
+        "ise_private_ip_address": []
+	},
+    {
+        "aaa_server_name": "dnac-ise5",
+		"aaa_server_ip_list": ["10.6.249.253"],
+		"aaa_server_shared_secret": "cisco123",
+        "aaa_server_role": "PRIMARY",
+	    "aaa_server_port": 0,
+		"aaa_server_accounting_port": 1813,
+		"aaa_server_authentication_port": 1812,
+		"aaa_server_protocol": "RADIUS",
+		"aaa_server_retries": 1,
+		"aaa_server_timeout": 2,
+        "is_ise_enabled" : false,
+        "ise_server_username": "admin",
+		"ise_server_password": "Ise123!",
+		"ise_server_fqdn": "dnac-ise5.cisco.com",
+        "ise_private_ip_address": []
+	}],
+    "sapro_ip_address_list": [{
+		"sapro_subnet": "1.2.3.0",
+		"sapro_start_address": "1.2.3.4",
+		"sapro_end_address": "1.2.3.10"
+	}],
+	"sapro_server_ip": "1.2.3.4",
+	"sapro_server_username": "root",
+	"sapro_server_password": "Grandkey",
+	"sapro_prompt": "A1#",
+	"platform_image": {
+		"3K": {
+			"update_image": "cat3k_caa-universalk9.16.05.01a.SPA.bin",
+			"base_image": "cat3k_caa-universalk9.16.05.99.SPA.bin"
+		}
+	},
+	"underlay_ip_pool_list":
+	{
+		    "San_Jose": [{
+                "role": "underlay",
+                "overlapping": false,
+                "ipPoolCidr": "192.11.0.0/16",
+                "ipPoolName": "192net",
+		"teacat":"basic flow",
+                "dhcpServerIps": [
+                  "192.11.7.11"
+                ],
+                "gateways": [
+                  "192.11.7.1"
+                ],
+                "dnsServerIps": [
+                ],
+                "underlay_ip_pool_cidr": [
+                  "192.11.7.0/24"
+                ],
+                "associate_site": [
+                  "San_Jose"
+                ],
+                "slaacSupport": false,
+                "group_name": ""
+              }],
+		    "Bangalore":[{
+		"role": "underlay",
+                "overlapping": false,
+                "ipPoolCidr": "192.11.0.0/16",
+                "ipPoolName": "192net",
+		"teacat":"insufficient lan pool",
+                "dhcpServerIps": [
+                  "192.11.5.11"
+                ],
+                "gateways": [
+                  "192.11.5.1"
+                ],
+                "dnsServerIps": [
+                ],
+                "underlay_ip_pool_cidr": [
+                  "192.11.5.0/27"
+                ],
+                "associate_site": [
+                  "Bangalore"
+                ],
+                "slaacSupport": false,
+                "group_name": ""
+              }],
+		    "San_Francisco":[{
+		"role": "underlay",
+                "overlapping": false,
+                "ipPoolCidr": "192.11.0.0/16",
+                "ipPoolName": "192net",
+		"teacat":"minimize pool",
+                "dhcpServerIps": [
+                  "192.11.2.11"
+                ],
+                "gateways": [
+                  "192.11.2.1"
+                ],
+                "dnsServerIps": [
+                ],
+                "underlay_ip_pool_cidr": [
+                  "192.11.2.0/26"
+                ],
+                "associate_site": [
+                  "San_Francisco"
+                ],
+                "slaacSupport": false,
+                "group_name": ""
+            }]
+		},
+	"ssm_range_list":[
+		{
+			"ssmRangeIpAddress": "226.1.1.10",
+			"ssmRangeWildcardMask": "0.0.0.0"
+		},
+		{
+			"ssmRangeIpAddress": "238.1.0.0",
+			"ssmRangeWildcardMask": "0.0.255.255"
+		}
+	],
+    "trex_path": "/home/trex2/trex/v2.34/trex_client/stl/console",
+    "trex_path1": "/home/trex2/trex/v2.34/trex_client/stl",
+    "boot_cmd_3k": "flash:cat3k_caa-universalk9.16.09.01prd7.SPA.bin",
+    "boot_cmd_4k": "bootflash:cat4k.bin",
+    "boot_cmd_6k": "flash:cat6k.bin",
+	"boot_cmd_9k": "flash:cat9k_iosxe.BLD_V169_1_THROTTLE_LATEST_19280819_030603.SSA.bin",
+	"boot_cmd_3560CX": "flash:c3560cx-universalk9-mz.152-6.E1.bin",
+	"boot_cmd_IE4k": "flash:ie4000-universalk9-mz.152-6.E1.bin",
+	"boot_cmd_IE3k": "flash:ies-lanbasek9-mz.152-6.E1.bin",
+	"boot_cmd_CDB": "flash:cdb-universalk9-mz.152-6.E/cdb-universalk9-mz.152-6.E.bin",
+	"hostname_csv": "northbound/config/lan_ankit_first_Test.csv",
+	"common": {
+		"__comment__": "This common section variables are used in IP block list feature",
+		"multicast_enabled": true,
+		"loopback_interface_name": "Loopback0",
+		"svi1_interface_name": "vlan1",
+		"svi2_interface_name": "vlan2",
+		"multicast_interface_name": "Loopback60000",
+		"loopback1_interface_name": "Loopback1",
+		"net_mask": "255.255.255.254",
+		"__comment": "Configure below IP addresses are from LAN Pool. Preferably give subnet last IP addresses",
+		"interface_ip_address": "192.11.7.188",
+		"interface_ip_address_1": "192.11.7.186",
+		"interface_ip_address_2": "192.11.7.184",
+		"interface_ip_address_3": "192.11.7.182",
+		"interface_ip_address_4": "192.11.7.180",
+		"insufficient_pool_area_name": "Bangalore",
+		"insufficient_pool_building_name": "Building16",
+		"minimize_pool_area_name": "San_Francisco",
+		"minimize_pool_building_name": "SFO1",
+		"main_pool_area_name": "San_Jose",
+		"main_pool_building_name": "Building18"
+	}
+}
+

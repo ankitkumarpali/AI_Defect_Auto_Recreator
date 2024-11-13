@@ -1,0 +1,162 @@
+devices:
+
+    Border-01:
+        alias: Border-01
+        type: cat9k
+        building_name: Building18
+        connections: {ip: 10.78.96.13, port: 2018, protocol: telnet, terminal_server_enable_password: lab,
+          terminal_server_password: lab, terminal_server_username: lab}
+        credentials: {enable_password: maglev123, password: maglev123, username: maglev}
+        connected_interfaces_list: [TwentyFiveGigE6/0/2]
+        loopback_0_address: 14.1.2.6
+        management_ip: 14.1.11.7
+        secure_fabric_device_tag: [BORDERNODE]
+        update_management_ip: 14.1.11.7
+        platform_image_tag: cat3k_Polaris_1
+        seed_ip: 14.1.11.7
+        seed_ip_int: TenGigabitEthernet1/0/34
+        seed_ip_mask: 255.255.255.254
+        device_type: IOS-XE
+        platform_type: 9K
+        platform_series: 9600
+        isisDomainPassword: cisco123
+        serial_number: FXS2241Q05H
+        site_name: San_Jose
+        transit_cd: ''
+        underlay_device_tier: Primary-Seed
+        uplink_interface: TenGigabitEthernet1/0/34
+        # Below parameters are added for IP Block list feature
+        second_lan_auto: False
+        connected_interfaces_list_lan_auto2: [FortyGigabitEthernet1/0/7]
+        connected_interface_with_secondary_seed: [FortyGigabitEthernet1/0/15]
+
+    Border-02:
+        alias: Border-02
+        type: cat6k
+        building_name: Building18
+        connections: {ip: 10.78.96.13, port: 2012, protocol: telnet, terminal_server_enable_password: lab,
+          terminal_server_password: lab, terminal_server_username: lab}
+        credentials: {enable_password: maglev123, password: maglev123, username: maglev}
+        connected_interfaces_list: [TenGigabitEthernet5/1,Ten5/7]
+        loopback_0_address: 14.1.2.1
+        management_ip: 14.1.11.5
+        secure_fabric_device_tag: [BORDERNODE]
+        update_management_ip: 14.1.11.5
+        platform_image_tag: cat6k_Polaris_1
+        seed_ip: 14.1.11.5
+        seed_ip_int: TenGigabitEthernet5/11
+        seed_ip_mask: 255.255.255.254
+        device_type: IOS-XE
+        platform_type: 6K
+        platform_series: 6800
+        isisDomainPassword: cisco123
+        serial_number: SAL172264UR
+        site_name: San_Jose
+        transit_cd: ''
+        underlay_device_tier: Secondary-Seed
+        uplink_interface: TenGigabitEthernet5/11
+        # Below parameters are added for IP Block list feature
+        second_lan_auto: False
+        connected_interfaces_list_lan_auto2: [FortyGigabitEthernet1/0/1]
+        connected_interface_with_primary_seed: [FortyGigabitEthernet1/0/15]
+
+    STK:
+        alias: STK
+        type: cat9k
+        building_name: Building18
+        connected_interfaces_list: []
+        connections: {ip: 10.78.96.13, port: 2017, protocol: telnet, terminal_server_enable_password: lab,
+          terminal_server_password: lab, terminal_server_username: lab}
+        credentials: {enable_password: maglev123, password: maglev123, username: maglev}
+        loopback_0_address: ''
+        management_ip: ''
+        secure_fabric_device_tag: [DISTRIBUTE]
+        update_management_ip: ''
+        platform_image_tag: ''
+        seed_ip: ''
+        seed_ip_int: ''
+        seed_ip_mask: 255.255.255.254
+        device_type: IOS-XE
+        platform_type: 9K
+        platform_series: 9500
+        isisDomainPassword: cisco123
+        serial_number: CAT2222L1QX
+        site_name: San_Jose
+        transit_cd: ''
+        underlay_device_tier: Tier2
+        uplink_interface: ''
+        # Below parameters are added for IP Block list feature
+        second_lan_auto: False
+        connected_interfaces_list_lan_auto2: [GigabitEthernet1/0/25, GigabitEthernet2/0/9]
+
+    STD:
+        alias: STD
+        type: cat9k
+        building_name: Building18
+        connections: {ip: 10.78.96.13, port: 2005, protocol: telnet, terminal_server_enable_password: lab,
+          terminal_server_password: lab, terminal_server_username: lab}
+        credentials: {enable_password: maglev123, password: maglev123, username: maglev}
+        loopback_0_address: ''
+        management_ip: ''
+        secure_fabric_device_tag: [DISTRIBUTE]
+        update_management_ip: ''
+        platform_image_tag: ''
+        seed_ip: ''
+        seed_ip_int: ''
+        seed_ip_mask: 255.255.255.254
+        device_type: IOS-XE
+        platform_type: 9K
+        platform_series: 9400
+        isisDomainPassword: cisco123
+        serial_number: FXS2235Q0TS
+        site_name: San_Jose
+        transit_cd: ''
+        underlay_device_tier: Tier2
+        uplink_interface: ''
+        # Below parameters are added for IP Block list feature
+        second_lan_auto: True
+        connected_interfaces_list_lan_auto2: [GigabitEthernet1/0/25, GigabitEthernet1/0/35]
+
+    ED_STK1:
+        alias: ED_STK1
+        type: cat9k
+        building_name: Building18
+        connected_interfaces_list: []
+        connections: {ip: 10.78.96.13, port: 2027, protocol: telnet, terminal_server_enable_password: lab,
+          terminal_server_password: lab, terminal_server_username: lab}
+        credentials: {enable_password: Maglev1234, password: Maglev1234, username: maglev}
+        device_type: IOS-XE
+        loopback_0_address: ''
+        management_ip: ''
+        secure_fabric_device_tag: [DISTRIBUTE]
+        platform_type: 9K
+        platform_series: 9400
+        seed_ip: ''
+        seed_ip_int: ''
+        seed_ip_mask: ''
+        serial_number: FXS2124Q5BY
+        site_name: San_Jose
+        transit_cd: ''
+        underlay_device_tier: Tier3
+        uplink_interface: ''
+        # Below parameters are added for IP Block list feature
+        second_lan_auto: False
+
+
+
+
+
+
+
+topology:
+
+        #testbed: {alias: topologyurTestbed, image_location: /tftpboot/, image_server: 10.10.22.233,
+        #image_server_password: Grand2004key, image_server_username: ef, name: scale_testbed, type: Physical}
+testbed:
+        alias: topologyurTestbed
+        image_location: /tftpboot/
+        image_server: 10.10.22.233
+        image_server_password: Grand2004key
+        image_server_username: ef
+        name: scale_testbed
+        type: Physical
